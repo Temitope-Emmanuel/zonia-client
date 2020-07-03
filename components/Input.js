@@ -14,14 +14,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Input = function({label,handlePress,focused,type,disabled,value,placeholder,handleChange,...props}) {
+const Input = function(
+  {label,inputType,handlePress,focused,
+    type,disabled,value,placeholder,handleChange,...props}) {
   const classes = useStyles();
   return (
         <TextField
           id={`outlined-full-width-${label}-${disabled}`}
           label={label}
           onKeyPress={handlePress}
-          autoComplete={""}
+          autoComplete="off"
           focused={focused}
           style={{ margin: 8 }}
           placeholder={placeholder}
@@ -30,16 +32,16 @@ const Input = function({label,handlePress,focused,type,disabled,value,placeholde
           margin="dense"
           onChange={handleChange}
           value={value}
-          InputLabelProps={{
-            shrink: true,
-            disabled:disabled,
-            focused:focused
-          }}
+          // InputLabelProps={{
+          //   shrink: true,
+          //   disabled:disabled,
+          //   focused:focused
+          // }}
           InputProps={{
             disabled:disabled,
             type:type
           }}
-          variant="outlined"
+          variant={inputType || "outlined"}
         />
   );
 }

@@ -9,8 +9,6 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import InfoIcon from '@material-ui/icons/Info';
 import ForumIcon from '@material-ui/icons/Forum';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-// import FaArrowCircleDown from '@material-ui/icons/ArrowDropDown';
-// import FaArrowCircleRight from '@material-ui/icons/ArrowRight';
 import {FaArrowCircleRight} from "react-icons/fa"
 import {FaArrowCircleDown} from "react-icons/fa"
 import {MdLocalGroceryStore} from 'react-icons/md'
@@ -155,9 +153,7 @@ const useStyles = makeStyles({
     backgroundColor:"whitesmoke",
     borderRadius:".4em",
     paddingTop:".3em"
-    // justifyContent:"center",
-    // alignItems:"center"
-}
+  }
 });
 
 const DefaultTreeView = function ({open}) {

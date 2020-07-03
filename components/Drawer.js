@@ -6,17 +6,12 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import MailIcon from '@material-ui/icons/Mail';
 import {Toolbar} from '@material-ui/core'
+import Dialog from "./Dialog.js"
 import Tree from "./Tree"
-// import DrawerContainer from "DrawerContainer"
 
 
-const drawerWidth =process.env.drawerWidth || 240;
+const drawerWidth = process.env.drawerWidth || 240;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -43,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(10) + 1,
+    width: theme.spacing(11) + 1,
     backgroundColor:"whitesmoke",
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(8.5) + 1,
+      width: theme.spacing(8.9) + 1,
     },
   }
 }));
@@ -58,7 +53,6 @@ const DrawerComponent = ({open,handleDrawer}) => {
     const [isDialog,setIsDialog] = React.useState(false)
     
     const toggleDialog = () => {
-      alert("we are open")
       setIsDialog(!isDialog)
     }
 
@@ -85,9 +79,13 @@ const DrawerComponent = ({open,handleDrawer}) => {
         {open && <Divider />}
         <Tree open={open} />
         {
-          open && <Button style={{
+          open && 
+          <>
+          <Button style={{
             backgroundColor:"grey"
           }} onClick={toggleDialog} >Add Product</Button>
+          <Dialog open={isDialog} toggleDialog={toggleDialog}/>
+          </>
         }
       </Drawer>
               
