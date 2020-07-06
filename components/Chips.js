@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
-import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import TagFacesIcon from '@material-ui/icons/TagFaces';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     listStyle: 'none',
     padding: theme.spacing(0.5),
     margin: 0,
+    backgroundColor:"whitesmoke",
+    borderRadius:"5em",
+    marginBottom:theme.spacing(6)
   },
   chip: {
     margin: theme.spacing(0.5),
@@ -21,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
 const Chips = function() {
   const classes = useStyles();
   const [chipData, setChipData] = React.useState([
-    { key: 0, label: 'Angular' },
-    { key: 1, label: 'jQuery' },
-    { key: 2, label: 'Polymer' },
-    { key: 3, label: 'React' },
-    { key: 4, label: 'Vue.js' },
+    { key: 0, label: 'Grocery' },
+    { key: 1, label: 'Technology' },
+    { key: 2, label: 'Appliances' },
+    { key: 3, label: 'Gaming' },
+    // { key: 4, label: 'Vue.js' },
   ]);
 
   const handleDelete = (chipToDelete) => () => {
@@ -33,26 +36,27 @@ const Chips = function() {
   };
 
   return (
-    <Paper component="ul" className={classes.root}>
-      {chipData.map((data) => {
-        let icon;
-
-        if (data.label === 'React') {
-          icon = <TagFacesIcon />;
-        }
-
-        return (
+    <>
+    <h2 style={{
+      textAlign:"center",
+      fontWeight:"400",
+      fontSize:"1.8em",
+      letterSpacing:".15em",
+      marginBottom:".4em"
+    }}>Choose At Least One Tag</h2>
+    <Box component="ul" className={classes.root}>
+      {chipData.map((data) => (
           <li key={data.key}>
             <Chip
-              icon={icon}
+              // icon={icon}
               label={data.label}
-              onDelete={data.label === 'React' ? undefined : handleDelete(data)}
+              onDelete={handleDelete(data)}
               className={classes.chip}
             />
           </li>
-        );
-      })}
-    </Paper>
+      ))}
+    </Box>
+    </>
   );
 }
 

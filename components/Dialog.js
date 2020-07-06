@@ -12,6 +12,7 @@ import Chips from "./Chips"
 import Input from "./Input"
 import {Divider,Box} from "@material-ui/core"
 import Slider from "./Slider"
+import {useDropzone} from "react-dropzone"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -19,33 +20,54 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const useStyles = makeStyles(theme => ({
   root:{
-    backgroundColor:"whitesmoke"
+    backgroundColor:"whitesmoke",
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"center",
+    "& > button":{
+      margin:theme.spacing(0,1.5),
+      padding:theme.spacing(1,2.3)
+    }
   },
   dialogContainer:{
-    padding:theme.spacing(1,1.5),
-    // margin:theme.spacing(1,.5),
     display:"flex",
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center",
-    backgroundColor:"whitesmoke"
+    borderRadius:".5em",
+    padding:theme.spacing(0,.8),
+    [theme.breakpoints.down("sm")]:{
+      flexDirection:"column-reverse"
+    }
   },
   chipContainer:{
-    backgroundColor:"whitesmoke",
     height:"100%",
-    width:"65%",
+    width:"55%",
     display:"flex",
-    justifyContent:"flex-end",
+    justifyContent:"space-evenly",
     flexDirection:"column",
-    allignItems:"flex-end",
-    margin:theme.spacing(1.5,0)
+    allignItems:"center",
+    padding:theme.spacing(0,1.5),
+    margin:theme.spacing(1,0)
   },
-  paperContainer:{
-    height:"100% !important"
+  infoContainer:{
+    padding:theme.spacing(.5,1),
+    backgroundColor:"whitesmoke"
   }
-}))
+  }))
 
 const AlertDialogSlide = function({open,toggleDialog}) {
+  const [file,setFile] = React.useState(null)
+  const [name,setName] = React.useState("")
+
+  const handleDrop = async (file) => {
+    setFile(file[0])
+  }
+
+  const {isDragAccept,getRootProps,getInputProps,acceptedFiles} = useDropzone({
+    accept:"image/jpeg,image/png",
+    onDrop:handleDrop
+  })
 
     const classes = useStyles()
     return (
@@ -70,8 +92,18 @@ const AlertDialogSlide = function({open,toggleDialog}) {
           <Paper elevation={8} 
            className={classes.dialogContainer}>
           <Box>
-          <Input inputType={"outlined"} label="Name"
-           placeholder="Name"/>
+          <Input inputType={"outlined"}
+           label="Name" placeholder="Name"/>
+           <Box {...getRootProps({className:classes.infoContainer})}>
+             <input {...getInputProps()} />
+             {!(acceptedFiles.length > 0) ? 
+              <p>Drag 'n' drop product image here,
+               or click to select files</p>
+               :
+               <p>A file image as been selected</p>
+             }
+             <em>Only *.jpeg and *.png images will be accepted</em>
+           </Box>
            </Box>
           <Divider flexItem orientation="vertical" />
           <Box className={classes.chipContainer}>
@@ -82,14 +114,14 @@ const AlertDialogSlide = function({open,toggleDialog}) {
           </DialogContent>
         <DialogActions className={classes.root}>
           <Button style={{
-              backgroundColor:red[100],
-              color:red[500]
+              backgroundColor:red[200],
+              color:red[700]
           }} onClick={toggleDialog} color="primary">
             Exit
           </Button>
           <Button style={{
-              backgroundColor:blue[100],
-              color:blue[500]
+              backgroundColor:blue[200],
+              color:blue[700]
           }} onClick={toggleDialog} color="primary">
             Submit
           </Button>

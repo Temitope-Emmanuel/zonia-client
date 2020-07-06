@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const DrawerComponent = ({open,handleDrawer}) => {
     const classes = useStyles()
     const theme = useTheme()
-    const [isDialog,setIsDialog] = React.useState(false)
+    const [isDialog,setIsDialog] = React.useState(true)
     
     const toggleDialog = () => {
       setIsDialog(!isDialog)
