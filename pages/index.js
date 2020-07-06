@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Index = function() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawer = () => {
     setOpen(!open);
